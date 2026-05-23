@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { getContrastingTextColor } from "@/lib/color-contrast";
 
 export const ThemeToggle = React.forwardRef<HTMLButtonElement>((props, ref) => {
   const { setTheme, theme, resolvedTheme } = useTheme();
@@ -30,6 +31,8 @@ export const ThemeToggle = React.forwardRef<HTMLButtonElement>((props, ref) => {
     setTheme(newTheme);
   };
 
+  const iconColor = mounted ? getContrastingTextColor(resolvedTheme === 'dark' ? '#131010' : '#F3E9DC') : undefined;
+
   return (
     <Button
       ref={ref}
@@ -38,11 +41,11 @@ export const ThemeToggle = React.forwardRef<HTMLButtonElement>((props, ref) => {
       className="rounded-full cursor-pointer relative z-10"
       onClick={handleToggle}
       aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
-      style={{ pointerEvents: 'auto' }}
+      style={{ pointerEvents: 'auto', color: iconColor }}
       {...props}
     >
-      <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" style={{ color: iconColor }} />
+      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" style={{ color: iconColor }} />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

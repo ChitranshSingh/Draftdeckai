@@ -42,6 +42,7 @@
     "security-audit": "node scripts/security-audit.js",
     "security-check": "npm audit && npm run security-audit",
     "test-pwa": "./scripts/test-pwa.sh",
+    "test:a11y": "playwright test",
     "build-pwa": "npm run build && npm start"
   },
   "dependencies": {
