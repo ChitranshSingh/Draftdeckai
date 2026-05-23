@@ -44,7 +44,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, style, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
     
-    let computedStyle = { ...style };
+    let computedStyle: React.CSSProperties = style ? { ...style } : {};
     // Extract background utility to dynamically calculate optimal text color for accessibility
     const bgClassMatch = className?.match(/bg-([a-z0-9-]+)/);
     // Let explicit text-* classes take precedence
